@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+{% if error %}
+
+    {{error}}
+
+{% else %}
+<br>
+<br>
+<div class="post">
+    <div class="post-title">
+        {{ title }}
+    </div>
+
+    <hr>
+    <div name="post-body">{{ words }}</div>
+</div>
+{% endif %}
+{% endblock %}

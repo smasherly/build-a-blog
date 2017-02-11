@@ -89,11 +89,24 @@ class NewPost(Handler):
             error = "we need both a title and some text"
             self.render_newpost(title, words, error)
 
-class ViewPost(webapp2.RequestHandler):
+class ViewPost(Handler):
+    # post_id = self.request.get("post")
+    # post_link = Post.get_by_id( int(post_id) )
+    #
+    # def render_viewpost (self, title="", words="", error="", id):
+    #     self.render("viewpost.html", title=title, words=words, error=error, id=post_link )
+
     def get(self, id):
-        pass
+        post = Post.get_by_id( int(id) )
+        # self.response.write ("I have {0}".format(id))
+        if post:
+            self.render("viewpost.html", title = post.title, words = post.words)
+        else:
+            error= "Sorry! That blog post doe not exsist."
+            self.render("viewpost.html", error = error)
+
 
 
 app = webapp2.WSGIApplication([('/', MainPage),
-                                ("/newpost", NewPost),
+                                ("/newpost/", NewPost),
                                 webapp2.Route('/blog/<id:\d+>', ViewPost)], debug =True)

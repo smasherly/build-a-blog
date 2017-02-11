@@ -3,7 +3,7 @@
 <html>
   <head>
 
-    <title>/Blog/</title>
+    <title>Blog</title>
   </head>
   <style type="text/css">
     body {
@@ -22,9 +22,9 @@
       font-size 20.px;
     }
 
-    input[type=text] {
+    /*input[type=text] {
       font-size: 24px;
-    }
+    }*/
     hr {
       margin: 20ox auto;
     }
@@ -36,24 +36,54 @@
     .post-body{
       margin: 0;
       font-size: 12px;
+      word-wrap: break-word;
+      width: 500px;
+
     }
+
+    pre {
+      margin: 0;
+      font-size: 12px;
+      word-wrap: break-word;
+      width: 500px;
+
+    }
+
+    .nav {
+      display: inline;
+
+    }
+
+    .page-wrapper {
+      width: 500px;
+      margin: 0 auto;
+    }
+
+
   </style>
+  <div class="page-wrapper">
+    <h5 class="nav"><a href ="/">Go back</a></h5>
+    |
+    <h5 class="nav"><a href= "/newpost/">Add a new post</a></h5>
   {% block content %}
 
   <body>
+
     <h1>Recent Blog Posts</h1>
+
 
   {% for post in posts %}
   <div class ="post">
-   <div class ="post-title">{{post.title}}
-   <pre class ="post-body">{{post.words}}</pre>
+   <div class ="post-title"><h6>
+     <a href="/blog/{{ post.key().id() }}" >{{post.title}} </h6></a>
+   <p class ="post-body">{{post.words}}</p>
      {% endfor %}
   </div>
 
 
 
 
-
+</div>
 
   {% endblock %}
 
