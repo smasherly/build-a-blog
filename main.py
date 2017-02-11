@@ -47,23 +47,53 @@ class MainPage(Handler):
     posts = db.GqlQuery("SELECT * FROM Post \
                         ORDER BY created DESC LIMIT 5")
 
-    self.render("front.html", title=title, words=words, error=error, posts=posts)
+    self.render("base.html", title=title, words=words, error=error, posts=posts)
+
 
 
   def get (self):
     self.render_front()
 
-  def post (self):
-    title = self.request.get("title")
-    words = self.request.get("words")
+  # def post (self):
+  #   title = self.request.get("title")
+  #   words = self.request.get("words")
+  #
+  #   if title and words:
+  #     a = Post(title = title, words = words) #creates new instence of art
+  #     a.put() #stores new art object in database
+  #
+  #     self.redirect("/" )
+  #   else:
+  #     error = "we need both a title and some text"
+  #     self.render_front(title, words, error)
 
-    if title and words:
-      a = Post(title = title, words = words) #creates new instence of art
-      a.put() #stores new art object in database
+class NewPost(Handler):
 
-      self.redirect("/" )
-    else:
-      error = "we need both a title and some text"
-      self.render_front(title, words, error)
+    def render_newpost (self, title="", words="", error=""):
+        self.render("newpost.html", title=title, words=words, error=error)
 
-app = webapp2.WSGIApplication([('/', MainPage)], debug =True)
+
+    def get (self):
+        self.render_newpost()
+
+    def post (self):
+        title = self.request.get("title")
+        words = self.request.get("words")
+
+        if title and words:
+            a = Post(title = title, words = words) #creates new instence of art
+            a.put() #stores new art object in database
+
+            self.redirect("/" )
+        else:
+            error = "we need both a title and some text"
+            self.render_newpost(title, words, error)
+
+class ViewPost(webapp2.RequestHandler):
+    def get(self, id):
+        pass
+
+
+app = webapp2.WSGIApplication([('/', MainPage),
+                                ("/newpost", NewPost),
+                                webapp2.Route('/blog/<id:\d+>', ViewPost)], debug =True)
