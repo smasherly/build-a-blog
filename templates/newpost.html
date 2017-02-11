@@ -9,13 +9,18 @@
       <div>Title</div>
       <input type="text" name="title" value="{{ title }}">
       </label>
+      <br>
       <label>
       <div>Content</div>
         <textarea name="words" value="{{ words }}"></textarea>
       </label>
       <div class="error">{{ error }}</div>
+      <div>
+        <br>
+
+      <input type="submit">
       </div>
-    <input type="submit">
+
     </form>
 
   {% endblock %}

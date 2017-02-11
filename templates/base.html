@@ -22,9 +22,11 @@
       font-size 20.px;
     }
 
-    /*input[type=text] {
-      font-size: 24px;
-    }*/
+    input[type=text] {
+      width: 400px;
+      font-size: 20px;
+      padding: 2px;
+    }
     hr {
       margin: 20ox auto;
     }
@@ -35,30 +37,32 @@
 
     .post-body{
       margin: 0;
-      font-size: 12px;
+      font-size: 19px;
       word-wrap: break-word;
       width: 500px;
 
     }
 
-    pre {
+    .post-title{
       margin: 0;
-      font-size: 12px;
+      font-size: 30px;
       word-wrap: break-word;
       width: 500px;
 
     }
+
+
 
     .nav {
       display: inline;
 
     }
-
-    .page-wrapper {
-      width: 500px;
-      margin: 0 auto;
+    textarea {
+        width: 400px;
+        height: 200px;
+        font-size: 17px;
+        font-family: monospace;
     }
-
 
   </style>
   <div class="page-wrapper">
@@ -74,8 +78,9 @@
 
   {% for post in posts %}
   <div class ="post">
-   <div class ="post-title"><h6>
-     <a href="/blog/{{ post.key().id() }}" >{{post.title}} </h6></a>
+   <div class ="post-title">
+     <a href="/blog/{{ post.key().id() }}" >{{post.title}}</a>
+     <br>
    <p class ="post-body">{{post.words}}</p>
      {% endfor %}
   </div>
