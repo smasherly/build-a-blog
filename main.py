@@ -73,6 +73,7 @@ class NewPost(Handler):
         self.render("newpost.html", title=title, words=words, error=error)
 
 
+
     def get (self):
         self.render_newpost()
 
@@ -83,8 +84,7 @@ class NewPost(Handler):
         if title and words:
             a = Post(title = title, words = words) #creates new instence of art
             a.put() #stores new art object in database
-
-            self.redirect("/" )
+            self.redirect("/blog/%s" % str(a.key().id()))
         else:
             error = "we need both a title and some text"
             self.render_newpost(title, words, error)
